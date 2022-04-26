@@ -3,17 +3,21 @@ const main = document.getElementById('main')
 const searchPhone = () =>{
     let input = document.getElementById("input");
      const inputValue = input.value;
+
+     main.innerHTML='';
     
     fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
     .then(res => res.json())
     .then(data=> showphone(data.data))
+
+    input.value =""
 } 
 
 const showphone = (data) =>{
     for(const phone of data){
-        const div = document.createElement('div')
-        div.classList.add('col-lg-4')
-        div.classList.add('mb-5')
+        const div = document.createElement('div');
+        div.classList.add("col-lg-4");
+        div.classList.add('mb-5');
         div.innerHTML = `
         
         <div class="card" style="width: 18rem;">
@@ -21,7 +25,7 @@ const showphone = (data) =>{
         <div class="card-body">
             <h5 class="card-title">${phone.brand}</h5>
             <p class="card-text">${phone.phone_name}</p>
-
+            <button onclick="phoneDetails()" class="btn btn-success">Details</button>
         </div>
     </div>
     `
@@ -29,3 +33,4 @@ const showphone = (data) =>{
     }
     
 }
+
